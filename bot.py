@@ -1,4 +1,92 @@
 import re
+import pandas as pd
+import numpy as np
+from sentence_transformers import SentenceTransformer
+from sklearn.metrics.pairwise import cosine_similarity
+
+keyword_mappings = {
+      'workout': ['exercise', 'workouts', 'bodybuilding', 'fitness plan', 'gym plan', 'workout schedule', 'plan'],
+      'meals': ['food', 'diet', 'low-calorie', 'feeding habits', 'mealplan', 'dietplan', 'nutrition'],
+      'loss': ['weightloss', 'abdomen fat loss', 'muscular fitness', 'cardio fitness', 'fitness', 'reduce fat', 'fat loss'],
+
+    }
+
+df = pd.read_excel('gym recommendation.xlsx')
+def clean_text(text):
+    if not isinstance(text, str):
+        return ""
+    # Add more cleaning steps if necessary, e.g., lowercasing, removing punctuation
+    return text.strip()
+
+#combining all columns so that it is easier for the model to get trained
+def combine_row_text(row, columns):
+    """
+    Combine text from specified columns in a row into a single string.
+    """
+    texts = [clean_text(str(row[col])) for col in columns if col in row and pd.notna(row[col])]
+    return ' '.join([t for t in texts if t])
+
+# Need to define smart_truncate or remove the call if it's not used
+# Example dummy smart_truncate function - replace with your actual implementation
+def smart_truncate(text, max_length):
+    if len(text) <= max_length:
+        return text
+    else:
+        return text[:max_length-3] + "..."
+
+def clean_response(text, max_length=150):
+    """Integrated with our smart truncation"""
+    if not isinstance(text, str):
+        return ""
+
+    # Remove unwanted patterns
+    text = re.sub(r'http\S+|www\S+|https\S+', '', text, flags=re.MULTILINE)
+    text = re.sub(r'\.{3,}', '...', text)
+    text = re.sub(r'\s+', ' ', text).strip()
+
+    return smart_truncate(text, max_length)
+
+# Remove empty rows based on a subset of text columns
+# Identify columns that are likely to contain text data for combining
+text_columns_to_combine = ['Fitness Type', 'Exercises', 'Equipment', 'Diet', 'Recommendation'] # Adjust as needed
+if len(text_columns_to_combine) > 0 and all(col in df.columns for col in text_columns_to_combine):
+    # Create the 'combined_text' column before removing rows
+    df['combined_text'] = df.apply(lambda row: combine_row_text(row, text_columns_to_combine), axis=1)
+    # Now remove rows where the combined text is empty or whitespace
+    df = df[df['combined_text'].str.strip().str.len() > 0]
+else:
+    print("Warning: Specified text columns for combination not found in DataFrame. Cannot create 'combined_text'.")
+    # Handle this case appropriately, e.g., exit or use a different approach
+
+# Save cleaned data
+df.to_csv('cleaned_data.csv', index=False)
+
+# Create embeddings
+model = SentenceTransformer('all-MiniLM-L6-v2')
+
+def get_embeddings(texts):
+    return model.encode(texts, convert_to_tensor=True)
+
+# Ensure 'combined_text' column exists and is not empty before creating embeddings
+if 'combined_text' in df.columns and not df['combined_text'].empty:
+    content_embeddings = get_embeddings(df['combined_text'].tolist())
+else:
+    # Handle the case where 'combined_text' was not created or is empty
+    print("Error: 'combined_text' column is not available or is empty. Cannot create embeddings.")
+    content_embeddings = None # Or handle as appropriate for your application
+
+
+#using chatbot to make changes
+def find_most_relevant_data(query, df, embeddings, top_k=3):
+    """Find most relevant response for a query"""
+    if embeddings is None:
+        print("Error: Embeddings are not available.")
+        return pd.DataFrame() # Return empty DataFrame or handle appropriately
+
+    query_embedding = model.encode([query], convert_to_tensor=True)
+    similarities = cosine_similarity(query_embedding.cpu(), embeddings.cpu())
+    top_indices = similarities.argsort()[0][-top_k:][::-1]
+    return df.iloc[top_indices]
 
 # --- Chatbot Rules Definition for a Fitness App ---
 # Maps user input patterns (keywords or regex) to chatbot responses and their intent.
