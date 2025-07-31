@@ -152,6 +152,10 @@
                 <button class="query-btn bg-teal-500 text-white py-2 px-3 rounded-lg hover:bg-teal-600 transition text-sm">"breakfast ideas"</button>
                 <button class="query-btn bg-teal-500 text-white py-2 px-3 rounded-lg hover:bg-teal-600 transition text-sm">"How much sleep?"</button>
                 <button class="query-btn bg-teal-500 text-white py-2 px-3 rounded-lg hover:bg-teal-600 transition text-sm">"motivation"</button>
+                <button class="query-btn bg-purple-500 text-white py-2 px-3 rounded-lg hover:bg-purple-600 transition text-sm">"yoga poses"</button>
+                <button class="query-btn bg-blue-500 text-white py-2 px-3 rounded-lg hover:bg-blue-600 transition text-sm">"daily water intake"</button>
+                <button class="query-btn bg-orange-500 text-white py-2 px-3 rounded-lg hover:bg-orange-600 transition text-sm">"rest days"</button>
+                <button class="query-btn bg-green-500 text-white py-2 px-3 rounded-lg hover:bg-green-600 transition text-sm">"muscle recovery"</button>
             </div>
         </section>
 
@@ -242,6 +246,18 @@
                 "cardio|endurance": {response: "Cardio helps heart health! Consider running, cycling, swimming, or brisk walking. Aim for at least 30 minutes most days. You can also ask about warm-up or cool-down exercises.", intent: 'cardio_workout'},
                 "warm up|cool down|warmup|cooldown": {response: "Always warm up for 5-10 minutes before and cool down for 5-10 minutes after your workout to prevent injuries. You can also ask about different workout types.", intent: 'workout_prep'},
                 "how many times a week|workout frequency|frequency": {response: "For general fitness, aim for 3-5 workout sessions per week, allowing for rest days. You can also ask about specific exercises.", intent: 'workout_frequency'},
+                
+                // Yoga and Flexibility Questions
+                "yoga|flexibility|stretching|poses|flexible": {response: "Yoga and flexibility are excellent for your body! Try poses like downward dog, child's pose, warrior I & II, and cat-cow stretches. Hold each pose for 15-30 seconds. You can also ask about specific poses or recovery tips.", intent: 'yoga_flexibility'},
+                "yoga poses|stretching exercises|flexibility routine": {response: "Great yoga poses for beginners: Mountain pose, tree pose, triangle pose, and seated forward fold. For flexibility, try hip circles, shoulder rolls, and gentle spinal twists. You can also ask about hydration or rest days.", intent: 'yoga_poses'},
+                
+                // Hydration Questions
+                "water|hydration|drink water|daily water|how much water": {response: "Hydration is crucial! Aim for 8-10 glasses (about 2-3 liters) of water daily. Drink more if you're active or in hot weather. Signs of good hydration include clear/pale yellow urine. You can also ask about nutrition or recovery.", intent: 'hydration'},
+                "dehydration|thirsty|water intake": {response: "Stay ahead of thirst! Drink water throughout the day, not just when thirsty. Add lemon or cucumber for flavor. Monitor your urine color as a hydration indicator. You can also ask about healthy meals or workout tips.", intent: 'hydration_tips'},
+                
+                // Rest and Recovery Questions
+                "rest day|recovery|rest days|muscle recovery|overtraining": {response: "Rest days are essential! Your muscles grow and repair during rest, not just during workouts. Take 1-2 full rest days per week. Light activities like walking or gentle yoga are fine. You can also ask about sleep or nutrition.", intent: 'rest_recovery'},
+                "sore muscles|muscle pain|recovery time": {response: "Muscle soreness is normal after exercise! Allow 24-48 hours for muscle recovery. Try gentle stretching, light walking, or foam rolling. Proper nutrition and sleep accelerate recovery. You can also ask about hydration or yoga.", intent: 'muscle_recovery'},
 
                 // Meal and Nutrition Questions
                 "healthy meals|diet plan|nutrition advice|meals|diet|nutrition": {response: "Nutrition is vital! Are you interested in meal ideas for breakfast, lunch, dinner, or snacks? You can specify your meal preference.", intent: 'nutrition_plan'},
@@ -292,6 +308,33 @@
                     } else if (/(^|\W)cardio(\W|$)/.test(cleanedInput)) {
                         lastMatchedIntentJS = 'cardio_workout';
                         return "Good choice! Cardio can include running, cycling, or swimming. Aim for a consistent duration. You can also ask about warm-up or cool-down exercises.";
+                    } else if (/(^|\W)yoga|flexibility(\W|$)/.test(cleanedInput)) {
+                        lastMatchedIntentJS = 'yoga_flexibility';
+                        return "Perfect! Yoga is excellent for flexibility and recovery. Try starting with basic poses like child's pose and downward dog. It's great for active recovery days too!";
+                    }
+                }
+                
+                // Enhanced context for yoga and flexibility
+                if (lastMatchedIntentJS === 'yoga_flexibility') {
+                    if (/(^|\W)beginner|start(\W|$)/.test(cleanedInput)) {
+                        lastMatchedIntentJS = 'yoga_poses';
+                        return "For yoga beginners, start with these foundational poses: mountain pose, child's pose, and cat-cow stretch. Practice 15-20 minutes daily. You can also ask about breathing techniques or hydration.";
+                    }
+                }
+                
+                // Enhanced context for hydration
+                if (lastMatchedIntentJS === 'hydration') {
+                    if (/(^|\W)workout|exercise(\W|$)/.test(cleanedInput)) {
+                        lastMatchedIntentJS = 'hydration_tips';
+                        return "During workouts, drink 7-10 oz every 10-20 minutes. Pre-hydrate 2-3 hours before exercise with 17-20 oz of water. Post-workout, drink 150% of fluid lost through sweat.";
+                    }
+                }
+                
+                // Enhanced context for recovery
+                if (lastMatchedIntentJS === 'rest_recovery') {
+                    if (/(^|\W)active|light(\W|$)/.test(cleanedInput)) {
+                        lastMatchedIntentJS = 'muscle_recovery';
+                        return "Active recovery is great! Try light yoga, gentle walking, or swimming at easy pace. This promotes blood flow and helps muscle recovery while staying lightly active.";
                     }
                 }
 
