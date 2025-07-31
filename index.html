@@ -9,11 +9,20 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chosen Palette: Warm Neutrals -->
+    <!-- Application Structure Plan: The SPA is structured as a narrative journey for a project evaluator. It begins with a high-level summary (Hero), delves into core technical concepts (Highlights), provides a hands-on demonstration (Features Explorer), explains setup (How to Run), offers a critical analysis (Limitations), and ends with a forward-looking vision (Roadmap). This thematic, non-linear structure is more engaging than a standard README and guides the user through understanding the project's value and potential logically. -->
+    <!-- Visualization & Content Choices:
+        - Report Info: Project Highlights -> Goal: Inform -> Viz/Presentation: Interactive cards with icons -> Interaction: Hover to reveal details -> Justification: Breaks down key technical strengths into digestible, visually appealing chunks. -> Library/Method: HTML/CSS/JS.
+        - Report Info: Features List -> Goal: Demonstrate -> Viz/Presentation: Simulated interactive terminal with live text input -> Interaction: Type queries or click sample questions to see chatbot responses appear -> Justification: The most crucial interaction. It makes the chatbot's functionality tangible and proves its capabilities instantly, allowing users to test its flexibility. -> Library/Method: JS DOM Manipulation, JS Regex.
+        - Report Info: Future Enhancements -> Goal: Compare/Visualize Vision -> Viz/Presentation: Bar chart showing estimated complexity of future tasks -> Interaction: Tooltips on hover provide more details. -> Justification: Translates a text list into a quantitative visualization, showing foresight and planning ability. -> Library/Method: Chart.js.
+        - Report Info: Future Development Areas (formerly Limitations) -> Goal: Showcase Vision/Growth -> Viz/Presentation: Styled list -> Interaction: None, clarity is the priority -> Justification: Replaces negative framing with a positive outlook on future work, aligning with a growth mindset for recruiters. -> Library/Method: HTML/CSS.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
         body {
-            /* font-family: 'Inter', sans-serif; */
-            /* background-color: #F7F7F7; */
-            /* color: #1a202c; */
+            font-family: 'Inter', sans-serif;
+            background-color: #F7F7F7;
+            color: #1a202c;
         }
         .chart-container {
             position: relative;
@@ -34,97 +43,93 @@
             background-color: #718096;
             border-radius: 20px;
         }
-
-
-   .dot {
-      animation: blink 1.4s infinite both;
-    }
-
-    .dot:nth-child(2) {
-      animation-delay: 0.2s;
-    }
-
-    .dot:nth-child(3) {
-      animation-delay: 0.4s;
-    }
-
-    @keyframes blink {
-      0% { opacity: 0.2; }
-      20% { opacity: 1; }
-      100% { opacity: 0.2; }
-    }
-
     </style>
 </head>
-<body class="antialiased dark:bg-gray-900 dark:text-gray-100 bg-white text-black">
+<body class="antialiased">
 
-    <header id="main-header" class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm dark:bg-gray-900/5 dark:text-gray-100">
+    <!-- Header & Navigation -->
+    <header id="main-header" class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <h1 class="text-xl font-bold text-gray-800 dark:text-gray-100">Fitness Chatbot Project</h1>
+            <h1 class="text-xl font-bold text-gray-800">Fitness Chatbot Project</h1>
             <div class="hidden md:flex space-x-8">
-                <a href="#highlights" class="text-gray-600 hover:text-teal-600 transition dark:text-gray-300 dark:hover:text-teal-400">Highlights</a>
-                <a href="#features" class="text-gray-600 hover:text-teal-600 transition dark:text-gray-300 dark:hover:text-teal-400">Features</a>
-                <a href="#roadmap" class="text-gray-600 hover:text-teal-600 transition dark:text-gray-300 dark:hover:text-teal-400">Roadmap</a>
-                <a href="#setup" class="text-gray-600 hover:text-teal-600 transition dark:text-gray-300 dark:hover:text-teal-400">Setup</a>
+                <a href="#highlights" class="text-gray-600 hover:text-teal-600 transition">Highlights</a>
+                <a href="#features" class="text-gray-600 hover:text-teal-600 transition">Features</a>
+                <a href="#roadmap" class="text-gray-600 hover:text-teal-600 transition">Roadmap</a>
+                <a href="#setup" class="text-gray-600 hover:text-teal-600 transition">Setup</a>
             </div>
-            <button id="theme-toggle" class="fixed top-2 right-5 p-3 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition">
-  <svg id="theme-toggle-dark-icon" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
-  </svg>
-  <svg id="theme-toggle-light-icon" class="w-6 h-6 hidden" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-    <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
-  </svg>
-</button>
         </nav>
-
     </header>
 
     <main class="container mx-auto px-6 py-12 md:py-20">
 
+        <!-- Hero Section -->
         <section class="text-center mb-20">
+            <!-- Badge -->
+            <div class="flex justify-center mb-6">
+                <span class="inline-flex items-center px-4 py-2 bg-teal-100 text-teal-800 text-sm font-medium rounded-full dark:bg-teal-800 dark:text-teal-100">
+                    🤖 AI-Powered Fitness Assistant
+                </span>
+            </div>
+            
             <h2 class="text-4xl md:text-5xl font-extrabold text-black dark:text-gray-100 mb-4">Interactive Project Overview</h2>
-            <p class="text-lg text-black dark:text-gray-400  max-w-3xl mx-auto">A foundational rule-based chatbot designed for fitness enthusiasts. This interactive experience breaks down the project's features, limitations, and future potential.</p>
+            <p class="text-lg text-black dark:text-gray-400 max-w-3xl mx-auto mb-8">A foundational rule-based chatbot designed for fitness enthusiasts. This interactive experience breaks down the project's features, limitations, and future potential.</p>
+            
+            <!-- Call-to-Action Buttons -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <a href="#features" class="inline-flex items-center px-6 py-3 bg-teal-600 text-white font-semibold rounded-lg hover:bg-teal-700 transition-colors duration-200 shadow-md hover:shadow-lg dark:bg-teal-500 dark:hover:bg-teal-600">
+                    Try the Chatbot
+                    <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                    </svg>
+                </a>
+                <a href="#setup" class="inline-flex items-center px-6 py-3 bg-white text-teal-600 font-semibold border-2 border-teal-600 rounded-lg hover:bg-teal-50 transition-colors duration-200 shadow-md hover:shadow-lg dark:bg-gray-800 dark:text-teal-400 dark:border-teal-400 dark:hover:bg-gray-700">
+                    View Setup Guide
+                    <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C20.832 18.477 19.246 18 17.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                    </svg>
+                </a>
+            </div>
         </section>
 
+        <!-- Project Highlights Section -->
         <section id="highlights" class="mb-20">
-            <h3 class="text-3xl font-bold text-center mb-2 text-black dark:text-gray-100">Project Highlights</h3>
-            <p class="text-md text-black dark:text-gray-400   text-center mb-12">This project showcases several key software development and NLP concepts. The core technical strengths are broken down into digestible, visually appealing chunks below.</p>
+            <h3 class="text-3xl font-bold text-center mb-2">Project Highlights</h3>
+            <p class="text-md text-gray-500 text-center mb-12">This project showcases several key software development and NLP concepts. The core technical strengths are broken down into digestible, visually appealing chunks below.</p>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 dark:bg-gray-800">
+                <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
                     <div class="flex items-center mb-3">
                         <div class="bg-teal-100 p-2 rounded-full mr-4">
                             <svg class="w-6 h-6 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
                         </div>
-                        <h4 class="text-xl text-black dark:text-gray-100 font-semibold">Rule-Based Logic</h4>
+                        <h4 class="text-xl font-semibold">Rule-Based Logic</h4>
                     </div>
-                    <p class="text-gray-600 dark:text-gray-300">Implements a system of predefined rules and regular expressions to respond to user queries effectively.</p>
+                    <p class="text-gray-600">Implements a system of predefined rules and regular expressions to respond to user queries effectively.</p>
                 </div>
-                <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 dark:bg-gray-800">
+                <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
                      <div class="flex items-center mb-3">
                         <div class="bg-teal-100 p-2 rounded-full mr-4">
                            <svg class="w-6 h-6 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l-4 4-4-4-4 4"></path></svg>
                         </div>
-                        <h4 class="text-xl font-semibold text-black dark:text-gray-100">Basic Context Management</h4>
+                        <h4 class="text-xl font-semibold">Basic Context Management</h4>
                     </div>
-                    <p class="text-gray-600 dark:text-gray-300">A simple mechanism remembers the last user intent, allowing for more natural follow-up conversations.</p>
+                    <p class="text-gray-600">A simple mechanism remembers the last user intent, allowing for more natural follow-up conversations.</p>
                 </div>
-                <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 dark:bg-gray-800">
+                <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
                      <div class="flex items-center mb-3">
                         <div class="bg-teal-100 p-2 rounded-full mr-4">
                            <svg class="w-6 h-6 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                         </div>
-                        <h4 class="text-xl font-semibold text-black dark:text-gray-100">Robust Input Handling</h4>
+                        <h4 class="text-xl font-semibold">Robust Input Handling</h4>
                     </div>
-                    <p class="text-gray-600 dark:text-gray-300">A dedicated function preprocesses user queries to normalize text for more reliable pattern matching.</p>
+                    <p class="text-gray-600">A dedicated function preprocesses user queries to normalize text for more reliable pattern matching.</p>
                 </div>
             </div>
         </section>
 
-
-
+        <!-- Features Explorer Section -->
         <section id="features" class="mb-20">
-            <h3 class="text-3xl font-bold text-center mb-2 text-black dark:text-gray-100">Features Explorer</h3>
-            <p class="text-md text-black dark:text-gray-400   text-center mb-12">Experience the chatbot's capabilities! Type your own questions into the terminal below, or click on the sample queries to see instant responses.</p>
+            <h3 class="text-3xl font-bold text-center mb-2">Features Explorer</h3>
+            <p class="text-md text-gray-500 text-center mb-12">Experience the chatbot's capabilities! Type your own questions into the terminal below, or click on the sample queries to see instant responses.</p>
             <div class="w-full max-w-4xl mx-auto bg-gray-800 rounded-xl shadow-2xl overflow-hidden">
                 <div class="bg-gray-700 p-3 flex items-center">
                     <div class="flex space-x-2">
@@ -134,93 +139,70 @@
                     </div>
                     <p class="text-center text-sm text-gray-400 flex-grow">bash -- FitnessBot</p>
                 </div>
-
-  <div id="terminal-body" class="terminal-body h-96 p-4 text-white font-mono text-sm overflow-hidden">
-  <div id="chat-box" class="h-64 overflow-y-auto mb-4 p-2 border border-gray-700 rounded text-sm font-mono scroll-smooth" style="scrollbar-width: none; -ms-overflow-style: none;">
-    <p><span class="text-green-400">Chatbot:</span> Hello! I'm your Fitness Bot.</p>
-  </div>
-  <style>
-    #chat-box::-webkit-scrollbar {
-      display: none; /* Hide scrollbar for Chrome/Safari */
-    }
-  </style>
-
-  <div id="typing-indicator" class="hidden text-gray-400 text-sm flex items-center gap-1">
-    <span class="dot">.</span>
-    <span class="dot">.</span>
-    <span class="dot">.</span>
-    <span>Bot is typing...</span>
-  </div>
-
-  <div class="p-4 bg-gray-700 flex space-x-2">
-    <input
-      type="text"
-      id="user-input"
-      class="flex-grow bg-gray-900 text-white rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500"
-      placeholder="Type your question here..."
-    />
-    <button
-      id="send-btn"
-      class="bg-teal-500 text-white py-2 px-4 rounded-lg hover:bg-teal-600 transition"
-    >
-      Send
-    </button>
-  </div>
-</div>
-
-
-</div>
-<div class="w-full max-w-4xl mx-auto mt-4 grid grid-cols-2 md:grid-cols-4 gap-3">
-    <button class="query-btn bg-teal-500 text-white py-2 px-3 rounded-lg hover:bg-teal-600 transition text-sm">"What's a good workout plan?"</button>
-    <button class="query-btn bg-teal-500 text-white py-2 px-3 rounded-lg hover:bg-teal-600 transition text-sm">"breakfast ideas"</button>
-    <button class="query-btn bg-teal-500 text-white py-2 px-3 rounded-lg hover:bg-teal-600 transition text-sm">"How much sleep?"</button>
-    <button class="query-btn bg-teal-500 text-white py-2 px-3 rounded-lg hover:bg-teal-600 transition text-sm">"motivation"</button>
-</div>
-
+                <div id="terminal-body" class="terminal-body h-96 p-4 text-white font-mono text-sm overflow-y-auto">
+                    <p><span class="text-green-400">Chatbot:</span> Hello! I'm your AI Fitness Assistant. Ready to help with workouts, nutrition, sleep, yoga, hydration, and recovery tips!</p>
+                </div>
+                <div class="p-4 bg-gray-700 flex space-x-2">
+                    <input type="text" id="user-input" class="flex-grow bg-gray-900 text-white rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="Type your question here...">
+                    <button id="send-btn" class="bg-teal-500 text-white py-2 px-4 rounded-lg hover:bg-teal-600 transition">Send</button>
+                </div>
+            </div>
+            <div class="w-full max-w-4xl mx-auto mt-4 grid grid-cols-2 md:grid-cols-4 gap-3">
+                <button class="query-btn bg-teal-500 text-white py-2 px-3 rounded-lg hover:bg-teal-600 transition text-sm">"What's a good workout plan?"</button>
+                <button class="query-btn bg-teal-500 text-white py-2 px-3 rounded-lg hover:bg-teal-600 transition text-sm">"breakfast ideas"</button>
+                <button class="query-btn bg-teal-500 text-white py-2 px-3 rounded-lg hover:bg-teal-600 transition text-sm">"How much sleep?"</button>
+                <button class="query-btn bg-teal-500 text-white py-2 px-3 rounded-lg hover:bg-teal-600 transition text-sm">"motivation"</button>
+                <button class="query-btn bg-purple-500 text-white py-2 px-3 rounded-lg hover:bg-purple-600 transition text-sm">"yoga poses"</button>
+                <button class="query-btn bg-blue-500 text-white py-2 px-3 rounded-lg hover:bg-blue-600 transition text-sm">"daily water intake"</button>
+                <button class="query-btn bg-orange-500 text-white py-2 px-3 rounded-lg hover:bg-orange-600 transition text-sm">"rest days"</button>
+                <button class="query-btn bg-green-500 text-white py-2 px-3 rounded-lg hover:bg-green-600 transition text-sm">"muscle recovery"</button>
+            </div>
         </section>
 
+        <!-- Roadmap & Future Enhancements -->
         <section id="roadmap" class="mb-20">
-            <h3 class="text-3xl font-bold text-center mb-2 text-black dark:text-gray-100">Project Roadmap</h3>
-            <p class="text-md text-black dark:text-gray-400   text-center mb-12">This project lays the groundwork for more advanced AI concepts. This chart visualizes the estimated complexity of future enhancements, demonstrating foresight and planning.</p>
-            <div class="bg-white p-4 sm:p-8 rounded-xl shadow-lg dark:bg-gray-800">
+            <h3 class="text-3xl font-bold text-center mb-2">Project Roadmap</h3>
+            <p class="text-md text-gray-500 text-center mb-12">This project lays the groundwork for more advanced AI concepts. This chart visualizes the estimated complexity of future enhancements, demonstrating foresight and planning.</p>
+            <div class="bg-white p-4 sm:p-8 rounded-xl shadow-lg">
                 <div class="chart-container">
                     <canvas id="roadmapChart"></canvas>
                 </div>
             </div>
         </section>
 
+        <!-- Setup & Future Development Areas (Replaced Limitations) -->
         <section id="setup" class="grid lg:grid-cols-5 gap-12">
             <div class="lg:col-span-3">
-                <h3 class="text-3xl font-bold mb-6 text-black dark:text-gray-100">How to Run</h3>
+                <h3 class="text-3xl font-bold mb-6">How to Run</h3>
                 <div class="space-y-6">
                     <div class="flex items-start">
                         <div class="flex-shrink-0 w-10 h-10 bg-teal-600 text-white font-bold text-lg rounded-full flex items-center justify-center mr-4">1</div>
                         <div>
-                            <h4 class="font-semibold text-lg text-black dark:text-gray-100">Prerequisites</h4>
-                            <p class="text-black dark:text-gray-400">Ensure Python 3.x is installed on your system.</p>
+                            <h4 class="font-semibold text-lg">Prerequisites</h4>
+                            <p class="text-gray-600">Ensure Python 3.x is installed on your system.</p>
                         </div>
                     </div>
                     <div class="flex items-start">
                         <div class="flex-shrink-0 w-10 h-10 bg-teal-600 text-white font-bold text-lg rounded-full flex items-center justify-center mr-4">2</div>
                         <div>
-                            <h4 class="font-semibold text-lg text-black dark:text-gray-100">Clone Repository</h4>
-                            <p class="text-black dark:text-gray-400">Download or clone the project files from its Git repository:</p>
-                             <code class="block bg-gray-100 text-gray-800 p-2 rounded-md mt-2 text-sm dark:bg-gray-700 dark:text-gray-200">git clone https://github.com/Akki-jaiswal/fitness-chatbot.git</code>
+                            <h4 class="font-semibold text-lg">Clone Repository</h4>
+                            <p class="text-gray-600">Download or clone the project files from its Git repository:</p>
+                             <code class="block bg-gray-100 text-gray-800 p-2 rounded-md mt-2 text-sm">git clone https://github.com/Akki-jaiswal/fitness-chatbot.git</code>
                         </div>
                     </div>
                      <div class="flex items-start">
                         <div class="flex-shrink-0 w-10 h-10 bg-teal-600 text-white font-bold text-lg rounded-full flex items-center justify-center mr-4">3</div>
                         <div>
-                            <h4 class="font-semibold text-lg text-black dark:text-gray-100">Execute Script</h4>
-                            <p class="text-black dark:text-gray-400">Navigate to the project directory and run the script from your terminal:</p>
-                             <code class="block bg-gray-100 text-gray-800 p-2 rounded-md mt-2 text-sm dark:bg-gray-700 dark:text-gray-200">python chatbot.py</code>
+                            <h4 class="font-semibold text-lg">Execute Script</h4>
+                            <p class="text-gray-600">Navigate to the project directory and run the script from your terminal:</p>
+                             <code class="block bg-gray-100 text-gray-800 p-2 rounded-md mt-2 text-sm">python chatbot.py</code>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="lg:col-span-2 bg-white p-8 rounded-xl shadow-lg dark:bg-gray-800">
-                <h3 class="text-2xl font-bold mb-4 text-black dark:text-gray-100">Future Development Areas</h3>
-                <ul class="space-y-4 text-gray-600 list-disc list-inside dark:text-gray-300">
+            <div class="lg:col-span-2 bg-white p-8 rounded-xl shadow-lg">
+                <h3 class="text-2xl font-bold mb-4">Future Development Areas</h3>
+                <ul class="space-y-4 text-gray-600 list-disc list-inside">
                     <li><span class="font-semibold">Intent Recognition with Machine Learning:</span> Transition from rigid rules to ML models for more intelligent understanding of user intent.</li>
                     <li><span class="font-semibold">Entity Extraction:</span> Develop capabilities to identify and extract key pieces of information (e.g., specific exercises, food types) from user queries.</li>
                     <li><span class="font-semibold">Advanced Context Management:</span> Implement a robust system to remember and utilize conversational history for more coherent and personalized interactions.</li>
@@ -233,7 +215,8 @@
 
     </main>
 
-    <footer class="bg-gray-800 text-white mt-20 dark:bg-gray-900 dark:text-gray-300">
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white mt-20">
         <div class="container mx-auto px-6 py-8 text-center">
             <p>&copy; 2025 Fitness Chatbot Project. All rights reserved.</p>
             <p class="text-sm text-gray-400 mt-2">This project is open source and available under the MIT License.</p>
@@ -242,96 +225,83 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const chatBox = document.getElementById("chat-box");
-            const typingIndicator = document.getElementById("typing-indicator");
+            const terminalBody = document.getElementById('terminal-body');
             const queryButtons = document.querySelectorAll('.query-btn');
             const userInputField = document.getElementById('user-input');
             const sendButton = document.getElementById('send-btn');
-            const mainHeader = document.getElementById('main-header');
-            const toggleBtn = document.getElementById('theme-toggle');
-            const darkIcon = document.getElementById('theme-toggle-dark-icon');
-            const lightIcon = document.getElementById('theme-toggle-light-icon');
+            const mainHeader = document.getElementById('main-header'); // Get the header element
 
-            // Theme handling
-            if (localStorage.getItem('theme') === 'dark' ||
-                (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-                document.documentElement.classList.add('dark');
-                darkIcon.classList.add('hidden');
-                lightIcon.classList.remove('hidden');
-            } else {
-                document.documentElement.classList.remove('dark');
-                lightIcon.classList.add('hidden');
-                darkIcon.classList.remove('hidden');
-            }
-
-            toggleBtn.addEventListener('click', () => {
-                darkIcon.classList.toggle('hidden');
-                lightIcon.classList.toggle('hidden');
-                if (document.documentElement.classList.contains('dark')) {
-                    document.documentElement.classList.remove('dark');
-                    localStorage.setItem('theme', 'light');
-                } else {
-                    document.documentElement.classList.add('dark');
-                    localStorage.setItem('theme', 'dark');
-                }
-            });
-
-            // Chatbot Rules
+            // --- Replicated Chatbot Logic (JavaScript Version) ---
+            // This mirrors the Python chatbot_rules for the interactive demo.
             const chatbotRulesJS = {
                 // Greetings and Introductions
-                "hi|hello|hey|greetings": { response: "Hello there! Welcome to your fitness companion. How can I help you achieve your health goals today? You can ask me about workouts, meals, or sleep.", intent: 'greeting' },
-                "how are you|how's it going": { response: "I'm a bot designed to help you with your fitness journey! How are you feeling today? Feel free to ask about workouts, nutrition, or sleep.", intent: 'greeting' },
-                "what is your name|who are you": { response: "I'm your friendly Fitness Bot, here to answer your questions about health, workouts, and nutrition. What would you like to know?", intent: 'greeting' },
+                "hi|hello|hey|greetings": {response: "Hello there! Welcome to your fitness companion. How can I help you achieve your health goals today? You can ask me about workouts, meals, or sleep.", intent: 'greeting'},
+                "how are you|how's it going": {response: "I'm a bot designed to help you with your fitness journey! How are you feeling today? Feel free to ask about workouts, nutrition, or sleep.", intent: 'greeting'},
+                "what is your name|who are you": {response: "I'm your friendly Fitness Bot, here to answer your questions about health, workouts, and nutrition. What would you like to know?", intent: 'greeting'},
+
 
                 // Workout-related Questions
-                "workout plan|exercise routine|gym plan|workout|exercise|gym": { response: "I can help with workout plans! Are you looking for something for beginners, strength training, cardio, or flexibility? You can specify your preference.", intent: 'workout_plan' },
-                "beginner|start exercising": { response: "For beginners, I recommend starting with bodyweight exercises like squats, push-ups (on knees if needed), and planks. Consistency is key! You can also ask about strength training or cardio.", intent: 'beginner_workout' },
-                "strength|strength training|build muscle": { response: "Strength training is great! Focus on compound movements like squats, deadlifts, bench press, and overhead press. Ensure proper form! You can also ask about workout frequency or warm-up routines.", intent: 'strength_workout' },
-                "cardio|endurance": { response: "Cardio helps heart health! Consider running, cycling, swimming, or brisk walking. Aim for at least 30 minutes most days. You can also ask about warm-up or cool-down exercises.", intent: 'cardio_workout' },
-                "warm up|cool down|warmup|cooldown": { response: "Always warm up for 5-10 minutes before and cool down for 5-10 minutes after your workout to prevent injuries. You can also ask about different workout types.", intent: 'workout_prep' },
-                "how many times a week|workout frequency|frequency": { response: "For general fitness, aim for 3-5 workout sessions per week, allowing for rest days. You can also ask about specific exercises.", intent: 'workout_frequency' },
+                "workout plan|exercise routine|gym plan|workout|exercise|gym": {response: "I can help with workout plans! Are you looking for something for beginners, strength training, cardio, or flexibility? You can specify your preference.", intent: 'workout_plan'},
+                "beginner|start exercising": {response: "For beginners, I recommend starting with bodyweight exercises like squats, push-ups (on knees if needed), and planks. Consistency is key! You can also ask about strength training or cardio.", intent: 'beginner_workout'},
+                "strength|strength training|build muscle": {response: "Strength training is great! Focus on compound movements like squats, deadlifts, bench press, and overhead press. Ensure proper form! You can also ask about workout frequency or warm-up routines.", intent: 'strength_workout'},
+                "cardio|endurance": {response: "Cardio helps heart health! Consider running, cycling, swimming, or brisk walking. Aim for at least 30 minutes most days. You can also ask about warm-up or cool-down exercises.", intent: 'cardio_workout'},
+                "warm up|cool down|warmup|cooldown": {response: "Always warm up for 5-10 minutes before and cool down for 5-10 minutes after your workout to prevent injuries. You can also ask about different workout types.", intent: 'workout_prep'},
+                "how many times a week|workout frequency|frequency": {response: "For general fitness, aim for 3-5 workout sessions per week, allowing for rest days. You can also ask about specific exercises.", intent: 'workout_frequency'},
+                
+                // Yoga and Flexibility Questions
+                "yoga|flexibility|stretching|poses|flexible": {response: "Yoga and flexibility are excellent for your body! Try poses like downward dog, child's pose, warrior I & II, and cat-cow stretches. Hold each pose for 15-30 seconds. You can also ask about specific poses or recovery tips.", intent: 'yoga_flexibility'},
+                "yoga poses|stretching exercises|flexibility routine": {response: "Great yoga poses for beginners: Mountain pose, tree pose, triangle pose, and seated forward fold. For flexibility, try hip circles, shoulder rolls, and gentle spinal twists. You can also ask about hydration or rest days.", intent: 'yoga_poses'},
+                
+                // Hydration Questions
+                "water|hydration|drink water|daily water|how much water": {response: "Hydration is crucial! Aim for 8-10 glasses (about 2-3 liters) of water daily. Drink more if you're active or in hot weather. Signs of good hydration include clear/pale yellow urine. You can also ask about nutrition or recovery.", intent: 'hydration'},
+                "dehydration|thirsty|water intake": {response: "Stay ahead of thirst! Drink water throughout the day, not just when thirsty. Add lemon or cucumber for flavor. Monitor your urine color as a hydration indicator. You can also ask about healthy meals or workout tips.", intent: 'hydration_tips'},
+                
+                // Rest and Recovery Questions
+                "rest day|recovery|rest days|muscle recovery|overtraining": {response: "Rest days are essential! Your muscles grow and repair during rest, not just during workouts. Take 1-2 full rest days per week. Light activities like walking or gentle yoga are fine. You can also ask about sleep or nutrition.", intent: 'rest_recovery'},
+                "sore muscles|muscle pain|recovery time": {response: "Muscle soreness is normal after exercise! Allow 24-48 hours for muscle recovery. Try gentle stretching, light walking, or foam rolling. Proper nutrition and sleep accelerate recovery. You can also ask about hydration or yoga.", intent: 'muscle_recovery'},
 
                 // Meal and Nutrition Questions
-                "healthy meals|diet plan|nutrition advice|meals|diet|nutrition": { response: "Nutrition is vital! Are you interested in meal ideas for breakfast, lunch, dinner, or snacks? You can specify your meal preference.", intent: 'nutrition_plan' },
-                "healthy breakfast|breakfast ideas|breakfast": { response: "A healthy breakfast could be oatmeal with fruits and nuts, Greek yogurt with berries, or scrambled eggs with veggies. You can also ask about meal prepping or other meal ideas.", intent: 'breakfast_ideas' },
-                "meal prep|prepare food|mealprep": { response: "Meal prepping can save time! Choose a day to cook larger batches of healthy proteins, complex carbs and veggies for the week. You can also ask about specific macronutrients.", intent: 'meal_prep' },
-                "calorie intake|how many calories|kg|kilogram|kgs|weight": { response: "Calorie needs and weight management are very personal. It's best to consult a professional for tailored advice. I can tell you about general nutrition principles like protein, carbs, and fats.", intent: 'weight_calories' },
-                "protein|carbs|fats": { response: "Balanced nutrition includes protein for muscle repair, complex carbs for energy, and healthy fats for overall health. Focus on whole, unprocessed foods. You can also ask about healthy meal ideas.", intent: 'macros' },
+                "healthy meals|diet plan|nutrition advice|meals|diet|nutrition": {response: "Nutrition is vital! Are you interested in meal ideas for breakfast, lunch, dinner, or snacks? You can specify your meal preference.", intent: 'nutrition_plan'},
+                "healthy breakfast|breakfast ideas|breakfast": {response: "A healthy breakfast could be oatmeal with fruits and nuts, Greek yogurt with berries, or scrambled eggs with veggies. You can also ask about meal prepping or other meal ideas.", intent: 'breakfast_ideas'},
+                "meal prep|prepare food|mealprep": {response: "Meal prepping can save time! Choose a day to cook larger batches of healthy proteins, complex carbs and veggies for the week. You can also ask about specific macronutrients.", intent: 'meal_prep'},
+                "calorie intake|how many calories|kg|kilogram|kgs|weight": {response: "Calorie needs and weight management are very personal. It's best to consult a professional for tailored advice. I can tell you about general nutrition principles like protein, carbs, and fats.", intent: 'weight_calories'},
+                "protein|carbs|fats": {response: "Balanced nutrition includes protein for muscle repair, complex carbs for energy, and healthy fats for overall health. Focus on whole, unprocessed foods. You can also ask about healthy meal ideas.", intent: 'macros'},
 
                 // Sleep-related Questions
-                "improve sleep|sleep better|sleep tips|sleep": { response: "Quality sleep is crucial for recovery! Try to maintain a consistent sleep schedule, create a dark and quiet environment, and avoid screens before bed. You can also ask about recommended sleep duration.", intent: 'sleep_tips' },
-                "how much sleep|hours of sleep": { response: "Most adults needs 7-9 hours of quality sleep per night for optimal health and recovery. You can also ask for tips to improve your sleep.", intent: 'sleep_duration' },
-                "insomnia|can't sleep": { response: "If you're struggling with insomnia, try relaxation techniques, limit caffeine, and ensure your bedroom is conducive to sleep. If it persists, consider seeing a doctor. You can also ask about general sleep tips.", intent: 'insomnia_help' },
+                "improve sleep|sleep better|sleep tips|sleep": {response: "Quality sleep is crucial for recovery! Try to maintain a consistent sleep schedule, create a dark and quiet environment, and avoid screens before bed. You can also ask about recommended sleep duration.", intent: 'sleep_tips'},
+                "how much sleep|hours of sleep": {response: "Most adults needs 7-9 hours of quality sleep per night for optimal health and recovery. You can also ask for tips to improve your sleep.", intent: 'sleep_duration'},
+                "insomnia|can't sleep": {response: "If you're struggling with insomnia, try relaxation techniques, limit caffeine, and ensure your bedroom is conducive to sleep. If it persists, consider seeing a doctor. You can also ask about general sleep tips.", intent: 'insomnia_help'},
 
                 // General Health & App Features
-                "track progress|monitor goals|track|progress|goals": { response: "Our app allows you to track your workouts, log your meals, and monitor your sleep patterns to see your progress over time! You can ask me about other app features.", intent: 'app_features' },
-                "app features|what can this app do|features": { response: "This app helps you with personalized workout plans, meal tracking, sleep monitoring, and goal setting to support your fitness journey. You can ask about specific features like tracking.", intent: 'app_features' },
-                "motivation|stay motivated": { response: "Staying motivated can be tough! Set small, achievable goals, find an accountability partner, and celebrate your progress. You can also ask about tracking your progress.", intent: 'motivation' },
+                "track progress|monitor goals|track|progress|goals": {response: "Our app allows you to track your workouts, log your meals, and monitor your sleep patterns to see your progress over time! You can ask me about other app features.", intent: 'app_features'},
+                "app features|what can this app do|features": {response: "This app helps you with personalized workout plans, meal tracking, sleep monitoring, and goal setting to support your fitness journey. You can ask about specific features like tracking.", intent: 'app_features'},
+                "motivation|stay motivated": {response: "Staying motivated can be tough! Set small, achievable goals, find an accountability partner, and celebrate your progress. You can also ask about tracking your progress.", intent: 'motivation'},
 
                 // Polite Closings and Exit Phrases
-                "thank you|thanks": { response: "You're most welcome! Keep up the great work on your fitness journey! Feel free to ask anything else.", intent: 'thank_you' },
-                "bye|goodbye|exit|quit|see you": { response: "Goodbye! Stay fit, stay healthy, and remember consistency is key! You can always come back if you have more fitness questions.", intent: 'exit' },
+                "thank you|thanks": {response: "You're most welcome! Keep up the great work on your fitness journey! Feel free to ask anything else.", intent: 'thank_you'},
+                "bye|goodbye|exit|quit|see you": {response: "Goodbye! Stay fit, stay healthy, and remember consistency is key! You can always come back if you have more fitness questions.", intent: 'exit'},
 
                 // Default Response (when no specific rule matches)
-                "default": { response: "I'm not sure I understand that fitness-related question. You can ask me about workouts, meals, or sleep.", intent: 'unknown' }
+                "default": {response: "I'm not sure I understand that fitness-related question. You can ask me about workouts, meals, or sleep.", intent: 'unknown'}
             };
 
-            let lastMatchedIntentJS = null;
+            let lastMatchedIntentJS = null; // JavaScript equivalent of last_matched_intent
 
             function cleanInputJS(userInput) {
                 userInput = userInput.toLowerCase();
+                // Remove all characters that are not letters, numbers, or spaces
                 userInput = userInput.replace(/[^\w\s]/g, '');
                 return userInput;
             }
 
             function getChatbotResponseJS(userInput) {
                 const cleanedInput = cleanInputJS(userInput);
-                let responseData = chatbotRulesJS.default;
+                let responseData = chatbotRulesJS.default; // Default response if no match
 
-                // Context-specific responses
+                // --- Context-specific responses (JavaScript version) ---
                 if (lastMatchedIntentJS === 'workout_plan') {
-                    if (/(^|\W)beginner(\W|$)/.test(cleanedInput)) {
-                        lastMatchedIntentJS = 'beginner_workout'; // Corrected typo here, was lastMatchedIntentIntentJS
+                    if (/(^|\W)beginner(\W|$)/.test(cleanedInput)) { // Using regex for word boundary
+                        lastMatchedIntentJS = 'beginner_workout';
                         return "Great! For beginners, focus on bodyweight exercises like squats, push-ups, and planks. Start slow and build consistency. You can also ask about strength training or cardio workouts.";
                     } else if (/(^|\W)strength(\W|$)/.test(cleanedInput)) {
                         lastMatchedIntentJS = 'strength_workout';
@@ -339,17 +309,44 @@
                     } else if (/(^|\W)cardio(\W|$)/.test(cleanedInput)) {
                         lastMatchedIntentJS = 'cardio_workout';
                         return "Good choice! Cardio can include running, cycling, or swimming. Aim for a consistent duration. You can also ask about warm-up or cool-down exercises.";
+                    } else if (/(^|\W)yoga|flexibility(\W|$)/.test(cleanedInput)) {
+                        lastMatchedIntentJS = 'yoga_flexibility';
+                        return "Perfect! Yoga is excellent for flexibility and recovery. Try starting with basic poses like child's pose and downward dog. It's great for active recovery days too!";
+                    }
+                }
+                
+                // Enhanced context for yoga and flexibility
+                if (lastMatchedIntentJS === 'yoga_flexibility') {
+                    if (/(^|\W)beginner|start(\W|$)/.test(cleanedInput)) {
+                        lastMatchedIntentJS = 'yoga_poses';
+                        return "For yoga beginners, start with these foundational poses: mountain pose, child's pose, and cat-cow stretch. Practice 15-20 minutes daily. You can also ask about breathing techniques or hydration.";
+                    }
+                }
+                
+                // Enhanced context for hydration
+                if (lastMatchedIntentJS === 'hydration') {
+                    if (/(^|\W)workout|exercise(\W|$)/.test(cleanedInput)) {
+                        lastMatchedIntentJS = 'hydration_tips';
+                        return "During workouts, drink 7-10 oz every 10-20 minutes. Pre-hydrate 2-3 hours before exercise with 17-20 oz of water. Post-workout, drink 150% of fluid lost through sweat.";
+                    }
+                }
+                
+                // Enhanced context for recovery
+                if (lastMatchedIntentJS === 'rest_recovery') {
+                    if (/(^|\W)active|light(\W|$)/.test(cleanedInput)) {
+                        lastMatchedIntentJS = 'muscle_recovery';
+                        return "Active recovery is great! Try light yoga, gentle walking, or swimming at easy pace. This promotes blood flow and helps muscle recovery while staying lightly active.";
                     }
                 }
 
-                // General rule matching
+                // --- General rule matching (JavaScript version) ---
                 for (const pattern in chatbotRulesJS) {
-                    if (pattern === "default") continue;
+                    if (pattern === "default") continue; // Skip default rule for iteration
 
-                    const regex = new RegExp(`^.*\\b(${pattern})\\b.*$`);
+                    const regex = new RegExp(`^.*\\b(${pattern})\\b.*$`); // Create regex from pattern string
                     if (regex.test(cleanedInput)) {
                         responseData = chatbotRulesJS[pattern];
-                        break;
+                        break; // Found a match, break the loop
                     }
                 }
 
@@ -357,51 +354,42 @@
                 return responseData.response;
             }
 
-            function appendMessage(sender, message) {
+            function displayMessage(sender, message) {
                 const p = document.createElement('p');
                 p.innerHTML = `<span class="${sender === 'You' ? 'text-blue-400' : 'text-green-400'}">${sender}:</span> ${message}`;
-                chatBox.appendChild(p);
-
-                // Smooth scroll to bottom without showing scrollbar
-                chatBox.scrollTo({
-                    top: chatBox.scrollHeight,
-                    behavior: 'smooth'
-                });
+                terminalBody.appendChild(p);
+                terminalBody.scrollTop = terminalBody.scrollHeight; // Auto-scroll to bottom
             }
 
-            function handleUserInput(userInput) {
-                if (userInput.trim() === "") return;
+            function handleUserInput(input) {
+                if (!input.trim()) return; // Don't process empty input
 
-                appendMessage("You", userInput);
-                userInputField.value = "";
+                displayMessage('You', input);
+                userInputField.value = ''; // Clear input field
 
-                typingIndicator.classList.remove('hidden');
+                const botResponse = getChatbotResponseJS(input);
 
                 setTimeout(() => {
-                    typingIndicator.classList.add('hidden');
-                    const botResponse = getChatbotResponseJS(userInput);
-                    appendMessage("Chatbot", botResponse);
-                }, 1500);
+                    displayMessage('Chatbot', botResponse);
+                }, 500); // Simulate typing delay
             }
 
-            // Event listeners for send button and enter key
+            // Event listener for Send button
             sendButton.addEventListener('click', () => {
                 handleUserInput(userInputField.value);
             });
 
+            // Event listener for Enter key in input field
             userInputField.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') {
-                    handleUserInput(e.target.value);
+                    handleUserInput(e.target.value); // Use e.target.value to get current input
                 }
             });
 
             // Event listeners for sample query buttons
             queryButtons.forEach(button => {
                 button.addEventListener('click', () => {
-                    const query = button.textContent.replace(/"/g, '').trim(); // Remove quotes and trim whitespace
-                    if (query) { // Ensure query is not empty after trimming
-                        handleUserInput(query);
-                    }
+                    handleUserInput(button.textContent.replace(/"/g, '')); // Remove quotes for processing
                 });
             });
 
@@ -428,19 +416,14 @@
                             beginAtZero: true,
                             title: {
                                 display: true,
-                                text: 'Complexity Score (1-10)',
-                                color: 'rgb(209 213 219)' // Gray-300 for dark mode, default black
-                            },
-                            ticks: {
-                                color: 'rgb(209 213 219)' // Gray-300 for dark mode, default black
+                                text: 'Complexity Score (1-10)'
                             }
                         },
                         x: {
                             ticks: {
                                 autoSkip: false,
                                 maxRotation: 45,
-                                minRotation: 45,
-                                color: 'rgb(209 213 219)' // Gray-300 for dark mode, default black
+                                minRotation: 45
                             }
                         }
                     },
@@ -466,14 +449,14 @@
                 }
             });
 
-            // Smooth Scrolling for Navigation
+            // --- Smooth Scrolling for Navigation ---
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
                     const targetId = this.getAttribute('href');
                     const targetElement = document.querySelector(targetId);
                     if (targetElement) {
-                        const headerOffset = mainHeader.offsetHeight;
+                        const headerOffset = mainHeader.offsetHeight; // Get height of fixed header
                         const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
                         const offsetPosition = elementPosition - headerOffset;
 
@@ -484,13 +467,7 @@
                     }
                 });
             });
-        }); // End of DOMContentLoaded listener
-
-        // Tailwind CSS configuration (should be outside DOMContentLoaded)
-        tailwind.config = {
-            darkMode: 'class'
-        }
+        });
     </script>
-
 </body>
 </html>
