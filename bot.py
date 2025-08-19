@@ -1,5 +1,5 @@
 import re
-
+from rapidfuzz import fuzz, process
 # --- Chatbot Rules Definition for a Fitness App ---
 # Maps user input patterns (keywords or regex) to chatbot responses and their intent.
 # Rules are processed in order, so specific patterns should appear before general ones.
@@ -82,16 +82,29 @@ def get_chatbot_response(user_input):
     # Prioritizes responses based on the last conversation turn.
     # Note: These context-specific responses are hardcoded for simplicity.
     # For more complex context, the 'response' from chatbot_rules could be used.
+     # --- Context-specific responses ---
     if last_matched_intent == 'workout_plan':
-        if re.search(r".*\b(beginner)\b.*", cleaned_input):
-            last_matched_intent = 'beginner_workout'
-            return "Great! For beginners, focus on bodyweight exercises like squats, push-ups, and planks. Start slow and build consistency. You can also ask about strength training or cardio workouts."
-        elif re.search(r".*\b(strength)\b.*", cleaned_input):
-            last_matched_intent = 'strength_workout'
-            return "Excellent! For strength training, compound movements like squats, deadlifts, and bench presses are key. Remember proper form! You can also ask about workout frequency or warm-up routines."
-        elif re.search(r".*\b(cardio)\b.*", cleaned_input):
-            last_matched_intent = 'cardio_workout'
-            return "Good choice! Cardio can include running, cycling, or swimming. Aim for a consistent duration. You can also ask about warm-up or cool-down exercises."
+        context_keywords = {
+            "beginner": ("beginner_workout",
+                         "Great! For beginners, focus on bodyweight exercises like squats, push-ups, and planks. Start slow and build consistency. You can also ask about strength training or cardio workouts."),
+            "strength": ("strength_workout",
+                         "Excellent! For strength training, compound movements like squats, deadlifts, and bench presses are key. Remember proper form! You can also ask about workout frequency or warm-up routines."),
+            "cardio": ("cardio_workout",
+                       "Good choice! Cardio can include running, cycling, or swimming. Aim for a consistent duration. You can also ask about warm-up or cool-down exercises.")
+        }
+
+        # 1) Try exact regex match first
+        for kw, (intent, resp) in context_keywords.items():
+            if re.search(rf".*\b({kw})\b.*", cleaned_input):
+                last_matched_intent = intent
+                return resp
+
+        # 2) 🔹 If no regex match, try fuzzy match
+        match, score, _ = process.extractOne(cleaned_input, context_keywords.keys(), scorer=fuzz.ratio)
+        if match and score >= 80:
+            intent, resp = context_keywords[match]
+            last_matched_intent = intent
+            return f"(Did you mean '{match}'?) " + resp
     # Add more context checks here if needed for other intents
 
     # --- General rule matching (fallback if no context match) ---
@@ -107,6 +120,23 @@ def get_chatbot_response(user_input):
                 if keyword in cleaned_input:
                     last_matched_intent = rule_data['intent']
                     return rule_data['response']
+                
+         # --- 🔹 Fuzzy Matching Fallback ---
+    keywords = []
+    for pattern in chatbot_rules.keys():
+        if pattern != "default":
+            keywords.extend(re.findall(r"\b\w+\b", pattern))  # extract words from regex
+
+    # Compare each word in input to keywords
+    for word in cleaned_input.split():
+        match, score, _ = process.extractOne(word, keywords, scorer=fuzz.ratio)
+        if match and score >= 80:  # threshold
+            for pattern, rule_data in chatbot_rules.items():
+                if re.search(match, pattern):
+                    last_matched_intent = rule_data['intent']
+                    return f"(Did you mean '{match}'?) " + rule_data['response']
+    
+    
 
     # Default response if no rule or context matches
     last_matched_intent = chatbot_rules["default"]['intent']
