@@ -58,26 +58,34 @@
 </head>
 <body class="antialiased dark:bg-gray-900 dark:text-gray-100 bg-white text-black">
 
-    <header id="main-header" class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm dark:bg-gray-900/5 dark:text-gray-100">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <h1 class="text-xl font-bold text-gray-800 dark:text-gray-100">Fitness Chatbot Project</h1>
-            <div class="hidden md:flex space-x-8">
-                <a href="#highlights" class="text-gray-600 hover:text-teal-600 transition dark:text-gray-300 dark:hover:text-teal-400">Highlights</a>
-                <a href="#features" class="text-gray-600 hover:text-teal-600 transition dark:text-gray-300 dark:hover:text-teal-400">Features</a>
-                <a href="#roadmap" class="text-gray-600 hover:text-teal-600 transition dark:text-gray-300 dark:hover:text-teal-400">Roadmap</a>
-                <a href="#setup" class="text-gray-600 hover:text-teal-600 transition dark:text-gray-300 dark:hover:text-teal-400">Setup</a>
-            </div>
-            <button id="theme-toggle" class="fixed top-2 right-5 p-3 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition">
-  <svg id="theme-toggle-dark-icon" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-    <path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path>
-  </svg>
-  <svg id="theme-toggle-light-icon" class="w-6 h-6 hidden" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-    <path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path>
-  </svg>
-</button>
-        </nav>
+  
+<header id="main-header" class="bg-white/70 dark:bg-gray-900/70 backdrop-blur-lg sticky top-0 z-50 shadow-md">
 
-    </header>
+
+
+  <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+    <!-- Logo -->
+    <h1 class="text-5xl font-extrabold text-teal-600 dark:text-teal-400">FitnessBot</h1>
+    
+    <!-- Nav Links -->
+    <div class="hidden md:flex space-x-10 font-medium">
+      <a href="#highlights" class="hover:text-teal-600 dark:hover:text-teal-400">Highlights</a>
+      <a href="#features" class="hover:text-teal-600 dark:hover:text-teal-400">Features</a>
+      <a href="#roadmap" class="hover:text-teal-600 dark:hover:text-teal-400">Roadmap</a>
+      <a href="#setup" class="hover:text-teal-600 dark:hover:text-teal-400">Setup</a>
+    </div>
+
+    <!-- CTA + Theme Toggle -->
+    <div class="flex items-center space-x-8">
+      <a href="#setup" class="hidden md:inline-block bg-teal-600 text-white px-4 py-2 rounded-lg shadow hover:bg-teal-700 transition">Get Started</a>
+      <button id="theme-toggle" class="p-2 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition">
+        <svg id="theme-toggle-dark-icon" class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+        <svg id="theme-toggle-light-icon" class="w-6 h-6 hidden" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+      </button>
+    </div>
+  </nav>
+</header>
+
 
     <main class="container mx-auto px-6 py-12 md:py-20">
 
@@ -122,8 +130,8 @@
 
 
 
-        <section id="features" class="mb-20">
-            <h3 class="text-3xl font-bold text-center mb-2 text-black dark:text-gray-100">Features Explorer</h3>
+        <section id="features" class=" border-t border-gray-300 dark:border-gray-600 mb-20 ">
+            <h3 class="text-3xl font-bold text-center mb-2 text-black dark:text-gray-100 py-8">Features Explorer</h3>
             <p class="text-md text-black dark:text-gray-400   text-center mb-12">Experience the chatbot's capabilities! Type your own questions into the terminal below, or click on the sample queries to see instant responses.</p>
             <div class="w-full max-w-4xl mx-auto bg-gray-800 rounded-xl shadow-2xl overflow-hidden">
                 <div class="bg-gray-700 p-3 flex items-center">
@@ -179,9 +187,9 @@
 
         </section>
 
-        <section id="roadmap" class="mb-20">
+        <section id="roadmap" class="border-t border-gray-300 dark:border-gray-600 py-8 mb-20">
             <h3 class="text-3xl font-bold text-center mb-2 text-black dark:text-gray-100">Project Roadmap</h3>
-            <p class="text-md text-black dark:text-gray-400   text-center mb-12">This project lays the groundwork for more advanced AI concepts. This chart visualizes the estimated complexity of future enhancements, demonstrating foresight and planning.</p>
+            <p class="text-md text-black dark:text-gray-400 py-5  text-center mb-12">This project lays the groundwork for more advanced AI concepts. This chart visualizes the estimated complexity of future enhancements, demonstrating foresight and planning.</p>
             <div class="bg-white p-4 sm:p-8 rounded-xl shadow-lg dark:bg-gray-800">
                 <div class="chart-container">
                     <canvas id="roadmapChart"></canvas>
@@ -189,7 +197,7 @@
             </div>
         </section>
 
-        <section id="setup" class="grid lg:grid-cols-5 gap-12">
+        <section id="setup" class="border-t border-gray-300 dark:border-gray-600 py-10 grid lg:grid-cols-5 gap-12">
             <div class="lg:col-span-3">
                 <h3 class="text-3xl font-bold mb-6 text-black dark:text-gray-100">How to Run</h3>
                 <div class="space-y-6">
@@ -233,12 +241,43 @@
 
     </main>
 
-    <footer class="bg-gray-800 text-white mt-20 dark:bg-gray-900 dark:text-gray-300">
-        <div class="container mx-auto px-6 py-8 text-center">
-            <p>&copy; 2025 Fitness Chatbot Project. All rights reserved.</p>
-            <p class="text-sm text-gray-400 mt-2">This project is open source and available under the MIT License.</p>
-        </div>
-    </footer>
+   <footer class="bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 mt-20">
+  <div class="container mx-auto px-6 py-12 grid md:grid-cols-3 gap-16 text-center md:text-left">
+    
+    <!-- About -->
+    <div class="md:pr-6">
+      <h4 class="text-4xl font-bold text-teal-600 dark:text-teal-400 mb-4">Fitness Chatbot</h4>
+      <p class="text-gray-600 dark:text-gray-400">Your AI-powered fitness companion. Learn, track, and improve your health journey with ease.</p>
+    </div>
+
+    <!-- Links -->
+    <div class="md:pl-20">
+      <h4 class="font-semibold text-teal-600 dark:text-teal-400 mb-4">Quick Links</h4>
+      <ul class="space-y-2">
+        <li><a href="#highlights" class="hover:text-teal-500 dark:hover:text-teal-400 transition">Highlights</a></li>
+        <li><a href="#features" class="hover:text-teal-500 dark:hover:text-teal-400 transition">Features</a></li>
+        <li><a href="#roadmap" class="hover:text-teal-500 dark:hover:text-teal-400 transition">Roadmap</a></li>
+        <li><a href="#setup" class="hover:text-teal-500 dark:hover:text-teal-400 transition">Setup</a></li>
+      </ul>
+    </div>
+
+    <!-- Social -->
+    <div>
+      <h4 class="font-semibold text-teal-600 dark:text-teal-400 mb-4">Connect</h4>
+      <div class="flex justify-center md:justify-start space-x-4">
+        <a href="#" class="hover:text-teal-500 dark:hover:text-teal-400 transition">Twitter</a>
+        <a href="https://github.com/Akki-jaiswal" class="hover:text-teal-500 dark:hover:text-teal-400 transition">GitHub</a>
+        <a href="https://www.linkedin.com/in/akshay-jaiswal-20348a31b" class="hover:text-teal-500 dark:hover:text-teal-400 transition">LinkedIn</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="border-t border-gray-300 dark:border-gray-600 text-center py-4 text-teal-600 dark:text-teal-400 text-sm">
+    © 2025 Fitness Chatbot. MIT License.
+  </div>
+</footer>
+
+
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -491,6 +530,47 @@
             darkMode: 'class'
         }
     </script>
+
+
+<!-- Scroll Button -->
+<button id="scroll-btn" class="fixed bottom-6 right-6 p-3 rounded-full shadow-lg 
+  bg-gradient-to-r from-teal-500 to-blue-600 text-white hover:opacity-90 transition-opacity">
+  <svg id="scroll-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
+    viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+    <path id="scroll-path" stroke-linecap="round" stroke-linejoin="round" d="M5 10l7 7 7-7" />
+  </svg>
+</button>
+
+<script>
+  const scrollBtn = document.getElementById('scroll-btn');
+  const scrollPath = document.getElementById('scroll-path');
+
+  function checkScroll() {
+    const nearTop = window.scrollY < 100;
+    const nearBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight - 100;
+
+    if (nearTop) {
+      // Show ⬇ arrow → scroll to bottom
+      scrollPath.setAttribute("d", "M5 10l7 7 7-7");
+      scrollBtn.onclick = () =>
+        window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+    } else if (nearBottom) {
+      // Show ⬆ arrow → scroll to top
+      scrollPath.setAttribute("d", "M19 14l-7-7-7 7");
+      scrollBtn.onclick = () =>
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      // Middle → default to scroll down
+      scrollPath.setAttribute("d", "M5 10l7 7 7-7");
+      scrollBtn.onclick = () =>
+        window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+    }
+  }
+
+  window.addEventListener("scroll", checkScroll);
+  checkScroll(); // run on load
+</script>
+
 
 </body>
 </html>
