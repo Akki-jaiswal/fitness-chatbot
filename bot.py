@@ -16,7 +16,6 @@ chatbot_rules = {
         'response': "I'm your friendly **Fitness Bot** 💪 Ask me about workouts, meals, or sleep!",
         'intent': 'greeting'
     },
-
     # Workout-related
     r".*\b(workout plan|exercise routine|gym plan|workout|exercise|gym)\b.*": {
         'response': "I can help with workout plans! 🏋️ Are you looking for beginners, strength, cardio, or flexibility?",
@@ -46,7 +45,6 @@ chatbot_rules = {
         'response': "Aim for 3–5 workout sessions per week 💡 and give your body time to rest.",
         'intent': 'workout_frequency'
     },
-
     # Nutrition
     r".*\b(healthy meals|diet plan|nutrition advice|meals|diet|nutrition)\b.*": {
         'response': "Nutrition is key! 🥗 Want ideas for breakfast, lunch, dinner, or snacks?",
@@ -80,7 +78,15 @@ chatbot_rules = {
         'response': "Balanced meals: protein for repair, carbs for energy, fats for health. 🥩🍞🥑",
         'intent': 'macros'
     },
-
+    # --- New rule added for calories and macronutrients info ---
+    r".*\b(calories?|macronutrients?|protein|carbs|carbohydrates|fats|fat)\b.*": {
+        'response': (
+            "Calories measure the energy in food. Protein and carbs provide 4 calories per gram each, "
+            "while fats provide 9 calories per gram. Protein helps build and repair muscles, carbs fuel your body, "
+            "and fats support hormone health and cell function. 🍗🍚🥑"
+        ),
+        'intent': 'calorie_macro_info'
+    },
     # Sleep
     r".*\b(improve sleep|sleep better|sleep tips|sleep)\b.*": {
         'response': "Sleep well 😴 Keep a routine, reduce screens before bed, and rest 7–9 hrs.",
@@ -94,7 +100,6 @@ chatbot_rules = {
         'response': "Try relaxation, avoid caffeine, and make your room sleep-friendly. 🛏️",
         'intent': 'insomnia_help'
     },
-
     # Motivation & Features
     r".*\b(track progress|monitor goals|track|progress|goals)\b.*": {
         'response': "📊 You can track workouts, meals, and sleep progress inside the app.",
@@ -108,6 +113,7 @@ chatbot_rules = {
         'response': "💡 Motivation tip: set small goals, find a buddy, and celebrate wins!",
         'intent': 'motivation'
     },
+
 
     # Help
     r".*\b(help)\b.*": {
@@ -126,7 +132,6 @@ chatbot_rules = {
         'response': "Goodbye 👋 Stay fit and healthy!",
         'intent': 'exit'
     },
-
     # Default
     "default": {
         'response': "🤔 I'm not sure about that. Type 'help' to see what I can do!",
@@ -135,13 +140,10 @@ chatbot_rules = {
 }
 
 last_matched_intent = None
-
-
 def clean_input(user_input):
     user_input = user_input.lower()
     user_input = re.sub(r'[^\w\s]', '', user_input)
     return user_input
-
 
 def get_chatbot_response(user_input):
     global last_matched_intent
@@ -170,7 +172,6 @@ def get_chatbot_response(user_input):
     # Default response
     last_matched_intent = chatbot_rules["default"]['intent']
     return chatbot_rules["default"]['response']
-
 
 # --- Streamlit App ---
 st.set_page_config(page_title="Fitness Chatbot", page_icon="💪")
