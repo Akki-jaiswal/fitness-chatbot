@@ -54,6 +54,55 @@
       100% { opacity: 0.2; }
     }
 
+    /* Hover Effects for Highlight Cards */
+    .highlight-card {
+        transition: all 0.3s ease;
+        transform: translateY(0) scale(1);
+    }
+
+    .highlight-card:hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        background: linear-gradient(135deg, #f0fdfa 0%, #e6fffa 100%);
+    }
+
+    .dark .highlight-card:hover {
+        background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .highlight-card .icon-wrapper {
+        transition: all 0.3s ease;
+    }
+
+    .highlight-card:hover .icon-wrapper {
+        transform: rotate(5deg) scale(1.1);
+    }
+
+    .highlight-card:hover .icon-wrapper svg {
+        transform: rotate(-5deg) scale(1.05);
+    }
+
+    /* Hover Effects for Query Buttons */
+    .query-btn {
+        transition: all 0.3s ease;
+        transform: translateY(0) scale(1);
+    }
+
+    .query-btn:hover {
+        transform: translateY(-4px) scale(1.05);
+        box-shadow: 0 12px 24px rgba(20, 184, 166, 0.3);
+        background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
+    }
+
+    .query-btn .btn-icon {
+        transition: all 0.3s ease;
+    }
+
+    .query-btn:hover .btn-icon {
+        transform: rotate(10deg) scale(1.15);
+    }
+
     </style>
 </head>
 <body class="antialiased dark:bg-gray-900 dark:text-gray-100 bg-white text-black">
@@ -90,27 +139,27 @@
             <h3 class="text-3xl font-bold text-center mb-2 text-black dark:text-gray-100">Project Highlights</h3>
             <p class="text-md text-black dark:text-gray-400   text-center mb-12">This project showcases several key software development and NLP concepts. The core technical strengths are broken down into digestible, visually appealing chunks below.</p>
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 dark:bg-gray-800">
+                <div class="highlight-card bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 dark:bg-gray-800">
                     <div class="flex items-center mb-3">
-                        <div class="bg-teal-100 p-2 rounded-full mr-4">
+                        <div class="icon-wrapper bg-teal-100 p-2 rounded-full mr-4">
                             <svg class="w-6 h-6 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
                         </div>
                         <h4 class="text-xl text-black dark:text-gray-100 font-semibold">Rule-Based Logic</h4>
                     </div>
                     <p class="text-gray-600 dark:text-gray-300">Implements a system of predefined rules and regular expressions to respond to user queries effectively.</p>
                 </div>
-                <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 dark:bg-gray-800">
+                <div class="highlight-card bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 dark:bg-gray-800">
                      <div class="flex items-center mb-3">
-                        <div class="bg-teal-100 p-2 rounded-full mr-4">
+                        <div class="icon-wrapper bg-teal-100 p-2 rounded-full mr-4">
                            <svg class="w-6 h-6 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l-4 4-4-4-4 4"></path></svg>
                         </div>
                         <h4 class="text-xl font-semibold text-black dark:text-gray-100">Basic Context Management</h4>
                     </div>
                     <p class="text-gray-600 dark:text-gray-300">A simple mechanism remembers the last user intent, allowing for more natural follow-up conversations.</p>
                 </div>
-                <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 dark:bg-gray-800">
+                <div class="highlight-card bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 dark:bg-gray-800">
                      <div class="flex items-center mb-3">
-                        <div class="bg-teal-100 p-2 rounded-full mr-4">
+                        <div class="icon-wrapper bg-teal-100 p-2 rounded-full mr-4">
                            <svg class="w-6 h-6 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                         </div>
                         <h4 class="text-xl font-semibold text-black dark:text-gray-100">Robust Input Handling</h4>
@@ -240,7 +289,7 @@
         </div>
     </footer>
 
-    <script>
+   <script>
         document.addEventListener('DOMContentLoaded', () => {
             const chatBox = document.getElementById("chat-box");
             const typingIndicator = document.getElementById("typing-indicator");
