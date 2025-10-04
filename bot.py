@@ -1,5 +1,6 @@
 import re
 import streamlit as st
+from enhanced_bot import get_enhanced_response, get_fallback_response
 
 # --- Chatbot Rules Definition for a Fitness App ---
 chatbot_rules = {
@@ -144,6 +145,15 @@ def clean_input(user_input):
 
 
 def get_chatbot_response(user_input):
+    try:
+        # Try enhanced response first
+        enhanced_response = get_enhanced_response(user_input)
+        if enhanced_response and "I'm here to help" not in enhanced_response:
+            return enhanced_response
+    except Exception as e:
+        st.error(f"Enhanced features temporarily unavailable: {str(e)}")
+    
+    # Fallback to original logic
     global last_matched_intent
     cleaned_input = clean_input(user_input)
 
@@ -174,25 +184,38 @@ def get_chatbot_response(user_input):
 
 # --- Streamlit App ---
 st.set_page_config(page_title="Fitness Chatbot", page_icon="💪")
-st.title("💬 Fitness Assistant Bot")
-st.write("Ask me about workouts, meals, or sleep!")
+st.title("💬 Enhanced Fitness Assistant Bot")
+st.write("🚀 **New Features**: Dynamic workouts, smart meal planning, streak tracking, mood-based fitness, challenges & more!")
+
+# Display user profile info
+if 'user_profile' in st.session_state:
+    profile = st.session_state.user_profile
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.metric("Workout Streak", f"{profile.workout_streak} days")
+    with col2:
+        st.metric("Energy Level", f"{profile.energy_level}/10")
+    with col3:
+        st.metric("Available Time", f"{profile.available_time} min")
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-# --- Suggested prompts for quick prediction ---
+# --- Enhanced suggested prompts ---
 suggested_prompts = [
-    "Give me a beginner workout plan",
-    "Suggest a healthy breakfast",
-    "How much sleep do I need?",
-    "Motivation tips to stay consistent",
-    "What are good cardio exercises?",
-    "Tell me about proteins and carbs",
-    "Suggest a meal prep idea",
-    "How many times should I workout per week?",
+    "I'm tired, give me a quick 10-minute workout",
+    "I'm energetic and have 30 minutes to exercise",
+    "Suggest a budget-friendly healthy breakfast",
+    "I need a weekly fitness challenge",
+    "Help me set a SMART fitness goal",
+    "I'm stressed, what exercise should I do?",
+    "Track my workout streak",
+    "Give me hydration tips for today",
+    "I need recovery suggestions",
+    "Suggest seasonal meal ideas"
 ]
 
-st.markdown("### 🔮 Suggested Prompts")
+st.markdown("### 🔮 Try These Enhanced Features")
 cols = st.columns(2)
 for i, prompt in enumerate(suggested_prompts):
     if cols[i % 2].button(prompt):
