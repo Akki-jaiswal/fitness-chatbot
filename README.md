@@ -3,7 +3,7 @@
 A foundational rule-based chatbot designed to provide basic information and guidance on fitness topics, including workouts, nutrition, and sleep. This project serves as an introductory exploration into Natural Language Processing (NLP) concepts and conversational AI using Python.
 
 ## 🚀 Live Demo
-
+.
 Experience the interactive web overview of this project here:
 [https://akki-jaiswal.github.io/fitness-chatbot/](https://akki-jaiswal.github.io/fitness-chatbot/)
 
